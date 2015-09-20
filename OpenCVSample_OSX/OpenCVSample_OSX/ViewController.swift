@@ -33,24 +33,25 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 			self.device = device as! AVCaptureDevice
 		}
 		if (self.device == nil) {
-			println("no device")
+			print("no device")
 			return
 		}
-		if let input = AVCaptureDeviceInput.deviceInputWithDevice(self.device, error: nil) as? AVCaptureDeviceInput {
+		do {
+			let input = try AVCaptureDeviceInput(device: self.device)
 			self.session.addInput(input)
-		} else {
-			println("no device input")
+		} catch {
+			print("no device input")
 			return
 		}
 		self.output = AVCaptureVideoDataOutput()
-		self.output.videoSettings = [ kCVPixelBufferPixelFormatTypeKey: kCVPixelFormatType_32BGRA ]
+		self.output.videoSettings = [ kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
 		let queue: dispatch_queue_t = dispatch_queue_create("videocapturequeue", nil)
 		self.output.setSampleBufferDelegate(self, queue: queue)
 		self.output.alwaysDiscardsLateVideoFrames = true
 		if self.session.canAddOutput(self.output) {
 			self.session.addOutput(self.output)
 		} else {
-			println("could not add a session output")
+			print("could not add a session output")
 			return
 		}
 		// My Mac not support activeVideoMinFrameDuration.

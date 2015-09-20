@@ -29,31 +29,33 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 			}
 		}
 		if (self.device == nil) {
-			println("no device")
+			print("no device")
 			return
 		}
-		if let input = AVCaptureDeviceInput.deviceInputWithDevice(self.device, error: nil) as? AVCaptureDeviceInput {
+		do {
+			let input = try AVCaptureDeviceInput(device: self.device)
 			self.session.addInput(input)
-		} else {
-			println("no device input")
+		} catch {
+			print("no device input")
 			return
 		}
 		self.output = AVCaptureVideoDataOutput()
-		self.output.videoSettings = [ kCVPixelBufferPixelFormatTypeKey: kCVPixelFormatType_32BGRA ]
+		self.output.videoSettings = [ kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA) ]
 		let queue: dispatch_queue_t = dispatch_queue_create("videocapturequeue", nil)
 		self.output.setSampleBufferDelegate(self, queue: queue)
 		self.output.alwaysDiscardsLateVideoFrames = true
 		if self.session.canAddOutput(self.output) {
 			self.session.addOutput(self.output)
 		} else {
-			println("could not add a session output")
+			print("could not add a session output")
 			return
 		}
-		if self.device.lockForConfiguration(nil) {
+		do {
+			try self.device.lockForConfiguration();
 			self.device.activeVideoMinFrameDuration = CMTimeMake(1, 20) // 20 fps
 			self.device.unlockForConfiguration()
-		} else {
-			println("could not configure a device")
+		} catch {
+			print("could not configure a device")
 			return
 		}
 
@@ -79,15 +81,15 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 		let height = CVPixelBufferGetHeight(buffer)
 		let color = CGColorSpaceCreateDeviceRGB()
 		let bits = 8
-		let info = CGBitmapInfo((CGBitmapInfo.ByteOrder32Little.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue) as UInt32)
-		let context: CGContextRef = CGBitmapContextCreate(address, width, height, bits, bytes, color, info) as CGContextRef
-		let imageRef: CGImageRef = CGBitmapContextCreateImage(context)
-		let capturedImage = UIImage(CGImage: imageRef, scale: 1.0, orientation: UIImageOrientation.Right)
+		let info = CGBitmapInfo.ByteOrder32Little.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue
+		let context: CGContext? = CGBitmapContextCreate(address, width, height, bits, bytes, color, info)
+		let image: CGImage? = CGBitmapContextCreateImage(context)
+		let capturedImage = UIImage(CGImage: image!, scale: 1.0, orientation: UIImageOrientation.Right)
 		CVPixelBufferUnlockBaseAddress(buffer, 0)
 		
 		// This is a filtering sample.
 		let opencvImage = OpenCV.cvtColorBGR2GRAY(capturedImage)
-		let resultImage = UIImage(CGImage: opencvImage.CGImage, scale: 1.0, orientation: capturedImage!.imageOrientation) // Restore an orientation of captured image.
+		let resultImage = UIImage(CGImage: opencvImage.CGImage!, scale: 1.0, orientation: capturedImage.imageOrientation) // Restore an orientation of captured image.
 
 		// Show the result.
 		dispatch_async(dispatch_get_main_queue(), {
