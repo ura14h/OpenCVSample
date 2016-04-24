@@ -32,5 +32,5 @@ DerivedData
 Carthage/Build
 
 # OpenCV binaries
-opencv.framework
+opencv2.framework
 
