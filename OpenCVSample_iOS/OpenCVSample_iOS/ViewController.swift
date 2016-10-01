@@ -24,7 +24,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 		self.session = AVCaptureSession()
 		self.session.sessionPreset = AVCaptureSessionPreset640x480
 		for device in AVCaptureDevice.devices() {
-			if (device.position == AVCaptureDevicePosition.Back) {
+			if ((device as AnyObject).position == AVCaptureDevicePosition.back) {
 				self.device = device as! AVCaptureDevice
 			}
 		}
@@ -41,7 +41,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 		}
 		self.output = AVCaptureVideoDataOutput()
 		self.output.videoSettings = [ kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA) ]
-		let queue: dispatch_queue_t = dispatch_queue_create("videocapturequeue", nil)
+		let queue: DispatchQueue = DispatchQueue(label: "videocapturequeue", attributes: [])
 		self.output.setSampleBufferDelegate(self, queue: queue)
 		self.output.alwaysDiscardsLateVideoFrames = true
 		if self.session.canAddOutput(self.output) {
@@ -66,33 +66,33 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 		super.didReceiveMemoryWarning()
 	}
 
-	override func shouldAutorotate() -> Bool {
+	override var shouldAutorotate : Bool {
 		return false
 	}
 
-	func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
+	func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
 		
 		// Convert a captured image buffer to UIImage.
 		let buffer: CVPixelBuffer! = CMSampleBufferGetImageBuffer(sampleBuffer)
-		CVPixelBufferLockBaseAddress(buffer, 0)
+		CVPixelBufferLockBaseAddress(buffer, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
 		let address = CVPixelBufferGetBaseAddressOfPlane(buffer, 0)
 		let bytes = CVPixelBufferGetBytesPerRow(buffer)
 		let width = CVPixelBufferGetWidth(buffer)
 		let height = CVPixelBufferGetHeight(buffer)
 		let color = CGColorSpaceCreateDeviceRGB()
 		let bits = 8
-		let info = CGBitmapInfo.ByteOrder32Little.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue
-		let context: CGContext? = CGBitmapContextCreate(address, width, height, bits, bytes, color, info)
-		let image: CGImage? = CGBitmapContextCreateImage(context)
-		let capturedImage = UIImage(CGImage: image!, scale: 1.0, orientation: UIImageOrientation.Right)
-		CVPixelBufferUnlockBaseAddress(buffer, 0)
+		let info = CGBitmapInfo.byteOrder32Little.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue
+		let context: CGContext? = CGContext(data: address, width: width, height: height, bitsPerComponent: bits, bytesPerRow: bytes, space: color, bitmapInfo: info)
+		let image: CGImage? = context?.makeImage()
+		let capturedImage = UIImage(cgImage: image!, scale: 1.0, orientation: UIImageOrientation.right)
+		CVPixelBufferUnlockBaseAddress(buffer, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
 		
 		// This is a filtering sample.
 		let opencvImage = OpenCV.cvtColorBGR2GRAY(capturedImage)
-		let resultImage = UIImage(CGImage: opencvImage.CGImage!, scale: 1.0, orientation: capturedImage.imageOrientation) // Restore an orientation of captured image.
+		let resultImage = UIImage(cgImage: (opencvImage?.cgImage!)!, scale: 1.0, orientation: capturedImage.imageOrientation) // Restore an orientation of captured image.
 
 		// Show the result.
-		dispatch_async(dispatch_get_main_queue(), {
+		DispatchQueue.main.async(execute: {
 			self.imageView.image = resultImage;
 		})
 	}

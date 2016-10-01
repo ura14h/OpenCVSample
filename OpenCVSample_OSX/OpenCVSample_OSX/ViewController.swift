@@ -21,8 +21,8 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 		super.viewDidLoad()
 
 		// Using NSLayoutPriorityDefaultLow (=250) makes an error. (why?)
-		self.imageView.setContentCompressionResistancePriority(250, forOrientation: NSLayoutConstraintOrientation.Horizontal)
-		self.imageView.setContentCompressionResistancePriority(250, forOrientation: NSLayoutConstraintOrientation.Vertical)
+		self.imageView.setContentCompressionResistancePriority(250, for: NSLayoutConstraintOrientation.horizontal)
+		self.imageView.setContentCompressionResistancePriority(250, for: NSLayoutConstraintOrientation.vertical)
 		
 		// Prepare a video capturing session.
 		self.session = AVCaptureSession()
@@ -45,7 +45,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 		}
 		self.output = AVCaptureVideoDataOutput()
 		self.output.videoSettings = [ kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
-		let queue: dispatch_queue_t = dispatch_queue_create("videocapturequeue", nil)
+		let queue: DispatchQueue = DispatchQueue(label: "videocapturequeue", attributes: [])
 		self.output.setSampleBufferDelegate(self, queue: queue)
 		self.output.alwaysDiscardsLateVideoFrames = true
 		if self.session.canAddOutput(self.output) {
@@ -60,21 +60,21 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 		self.session.startRunning()
 	}
 
-	func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
+	func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
 		
 		// Convert a captured image buffer to NSImage.
 		let buffer: CVPixelBuffer! = CMSampleBufferGetImageBuffer(sampleBuffer)
-		CVPixelBufferLockBaseAddress(buffer, 0)
-		let imageRep = NSCIImageRep(CIImage: CIImage(CVImageBuffer: buffer))
+		CVPixelBufferLockBaseAddress(buffer, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
+		let imageRep = NSCIImageRep(ciImage: CIImage(cvImageBuffer: buffer))
 		let capturedImage = NSImage(size: imageRep.size)
 		capturedImage.addRepresentation(imageRep)
-		CVPixelBufferUnlockBaseAddress(buffer, 0)
+		CVPixelBufferUnlockBaseAddress(buffer, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
 
 		// This is a filtering sample.
 		let resultImage = OpenCV.cvtColorBGR2GRAY(capturedImage)
 		
 		// Show the result.
-		dispatch_async(dispatch_get_main_queue(), {
+		DispatchQueue.main.async(execute: {
 			self.imageView.image = resultImage;
 		})
 	}

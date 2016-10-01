@@ -17,6 +17,9 @@ You can get OpenCV binary by following steps.
 
 ### OpenCV for OS X
 
+> __This approach may fail on new macOS.__
+> Because QTKit necessary to build have been removed from macOS 10.12. Use OS X 10.11 or try a next approach.
+
   1. Prepare CMake. (e.g. `port install cmake`)
   2. Download `opencv-3.1.0.zip` from [https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/3.1.0/](https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/3.1.0/).
   3. Prepare a working directory. (e.g. `mkdir ~/foo`)
@@ -25,13 +28,22 @@ You can get OpenCV binary by following steps.
   6. Run a build script. ``python opencv-3.1.0/platforms/osx/build_framework.py osx``
   7. Copy `osx/opencv2.framework` into `OpenCVSample_OSX` directory.
 
+> For macOS 10.12 and latest OpenCV.
+
+  1. Prepare CMake. (e.g. `port install cmake`)
+  2. Prepare a working directory. (e.g. `mkdir ~/foo`)
+  3. Open terminal at the working directory. (e.g. `cd ~/foo`)
+  4. Tune the setting of git. ``git config --global http.postBuffer 524288000``
+  5. Download source code. ``git clone https://github.com/Itseez/opencv.git``
+  6. Run a build script. ``python opencv/platforms/osx/build_framework.py osx``
+  7. Copy `osx/opencv2.framework` into `OpenCVSample_OSX` directory.
 
 ## Requirements
 
-* Mac OS X 10.11
-* iOS 8.0
-* Xcode 7.3
-* Swift 2.2
+* Mac OS X 10.12
+* iOS 10.0
+* Xcode 8.0
+* Swift 3.0
 
 
 ## License
