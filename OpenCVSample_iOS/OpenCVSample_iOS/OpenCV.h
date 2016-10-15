@@ -11,6 +11,6 @@
 @interface OpenCV : NSObject
 
 /// Converts a full color image to grayscale image with using OpenCV.
-+ (UIImage *)cvtColorBGR2GRAY:(UIImage *)image;
++ (nonnull UIImage *)cvtColorBGR2GRAY:(nonnull UIImage *)image;
 
 @end

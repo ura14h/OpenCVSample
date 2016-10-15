@@ -63,12 +63,15 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 	func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
 		
 		// Convert a captured image buffer to NSImage.
-		let buffer: CVPixelBuffer! = CMSampleBufferGetImageBuffer(sampleBuffer)
-		CVPixelBufferLockBaseAddress(buffer, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
+		guard let buffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+			print("could not get a pixel buffer")
+			return
+		}
+		CVPixelBufferLockBaseAddress(buffer, CVPixelBufferLockFlags.readOnly)
 		let imageRep = NSCIImageRep(ciImage: CIImage(cvImageBuffer: buffer))
 		let capturedImage = NSImage(size: imageRep.size)
 		capturedImage.addRepresentation(imageRep)
-		CVPixelBufferUnlockBaseAddress(buffer, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
+		CVPixelBufferUnlockBaseAddress(buffer, CVPixelBufferLockFlags.readOnly)
 
 		// This is a filtering sample.
 		let resultImage = OpenCV.cvtColorBGR2GRAY(capturedImage)

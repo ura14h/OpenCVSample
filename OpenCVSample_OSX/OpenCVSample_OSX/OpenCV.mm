@@ -70,7 +70,7 @@ static NSImage *MatToNSImage(cv::Mat &mat) {
 
 @implementation OpenCV
 
-+ (NSImage *)cvtColorBGR2GRAY:(NSImage *)image {
++ (nonnull NSImage *)cvtColorBGR2GRAY:(nonnull NSImage *)image {
 	cv::Mat bgrMat;
 	NSImageToMat(image, bgrMat);
 	cv::Mat grayMat;

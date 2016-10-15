@@ -66,17 +66,25 @@ static UIImage *MatToUIImage(cv::Mat &mat) {
 	return image;
 }
 
+/// Restore the orientation to image.
+static UIImage *RestoreUIImageOrientation(UIImage *processed, UIImage *original) {
+	if (processed.imageOrientation == original.imageOrientation) {
+		return processed;
+	}
+	return [UIImage imageWithCGImage:processed.CGImage scale:1.0 orientation:original.imageOrientation];
+}
+
 #pragma mark -
 
 @implementation OpenCV
 
-+ (UIImage *)cvtColorBGR2GRAY:(UIImage *)image {
++ (nonnull UIImage *)cvtColorBGR2GRAY:(nonnull UIImage *)image {
 	cv::Mat bgrMat;
 	UIImageToMat(image, bgrMat);
 	cv::Mat grayMat;
 	cv::cvtColor(bgrMat, grayMat, CV_BGR2GRAY);
 	UIImage *grayImage = MatToUIImage(grayMat);
-	return grayImage;
+	return RestoreUIImageOrientation(grayImage, image);
 }
 
 @end

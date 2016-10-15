@@ -40,7 +40,7 @@ You can get OpenCV binary by following steps.
 
 ## Requirements
 
-* Mac OS X 10.12
+* macOS 10.12
 * iOS 10.0
 * Xcode 8.0
 * Swift 3.0

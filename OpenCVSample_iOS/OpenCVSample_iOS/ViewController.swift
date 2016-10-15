@@ -22,7 +22,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 
 		// Prepare a video capturing session.
 		self.session = AVCaptureSession()
-		self.session.sessionPreset = AVCaptureSessionPreset640x480
+		self.session.sessionPreset = AVCaptureSessionPreset640x480 // not work in iOS 10 simulator
 		for device in AVCaptureDevice.devices() {
 			if ((device as AnyObject).position == AVCaptureDevicePosition.back) {
 				self.device = device as! AVCaptureDevice
@@ -73,23 +73,36 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 	func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
 		
 		// Convert a captured image buffer to UIImage.
-		let buffer: CVPixelBuffer! = CMSampleBufferGetImageBuffer(sampleBuffer)
-		CVPixelBufferLockBaseAddress(buffer, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
-		let address = CVPixelBufferGetBaseAddressOfPlane(buffer, 0)
-		let bytes = CVPixelBufferGetBytesPerRow(buffer)
-		let width = CVPixelBufferGetWidth(buffer)
-		let height = CVPixelBufferGetHeight(buffer)
-		let color = CGColorSpaceCreateDeviceRGB()
-		let bits = 8
-		let info = CGBitmapInfo.byteOrder32Little.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue
-		let context: CGContext? = CGContext(data: address, width: width, height: height, bitsPerComponent: bits, bytesPerRow: bytes, space: color, bitmapInfo: info)
-		let image: CGImage? = context?.makeImage()
-		let capturedImage = UIImage(cgImage: image!, scale: 1.0, orientation: UIImageOrientation.right)
-		CVPixelBufferUnlockBaseAddress(buffer, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
+		guard let buffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+			print("could not get a pixel buffer")
+			return
+		}
+		let capturedImage: UIImage
+		do {
+			CVPixelBufferLockBaseAddress(buffer, CVPixelBufferLockFlags.readOnly)
+			defer {
+				CVPixelBufferUnlockBaseAddress(buffer, CVPixelBufferLockFlags.readOnly)
+			}
+			let address = CVPixelBufferGetBaseAddressOfPlane(buffer, 0)
+			let bytes = CVPixelBufferGetBytesPerRow(buffer)
+			let width = CVPixelBufferGetWidth(buffer)
+			let height = CVPixelBufferGetHeight(buffer)
+			let color = CGColorSpaceCreateDeviceRGB()
+			let bits = 8
+			let info = CGBitmapInfo.byteOrder32Little.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue
+			guard let context = CGContext(data: address, width: width, height: height, bitsPerComponent: bits, bytesPerRow: bytes, space: color, bitmapInfo: info) else {
+				print("could not create an CGContext")
+				return
+			}
+			guard let image = context.makeImage() else {
+				print("could not create an CGImage")
+				return
+			}
+			capturedImage = UIImage(cgImage: image, scale: 1.0, orientation: UIImageOrientation.right)
+		}
 		
 		// This is a filtering sample.
-		let opencvImage = OpenCV.cvtColorBGR2GRAY(capturedImage)
-		let resultImage = UIImage(cgImage: (opencvImage?.cgImage!)!, scale: 1.0, orientation: capturedImage.imageOrientation) // Restore an orientation of captured image.
+		let resultImage = OpenCV.cvtColorBGR2GRAY(capturedImage)
 
 		// Show the result.
 		DispatchQueue.main.async(execute: {
