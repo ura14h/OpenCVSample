@@ -51,7 +51,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 			return
 		}
 		do {
-			try self.device.lockForConfiguration();
+			try self.device.lockForConfiguration()
 			self.device.activeVideoMinFrameDuration = CMTimeMake(1, 20) // 20 fps
 			self.device.unlockForConfiguration()
 		} catch {
@@ -106,7 +106,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 
 		// Show the result.
 		DispatchQueue.main.async(execute: {
-			self.imageView.image = resultImage;
+			self.imageView.image = resultImage
 		})
 	}
 }

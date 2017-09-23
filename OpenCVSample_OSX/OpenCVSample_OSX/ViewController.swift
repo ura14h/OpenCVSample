@@ -74,7 +74,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 		
 		// Show the result.
 		DispatchQueue.main.async(execute: {
-			self.imageView.image = resultImage;
+			self.imageView.image = resultImage
 		})
 	}
 }
