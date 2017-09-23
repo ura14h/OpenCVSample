@@ -20,10 +20,6 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		// Using NSLayoutPriorityDefaultLow (=250) makes an error. (why?)
-		self.imageView.setContentCompressionResistancePriority(250, for: NSLayoutConstraintOrientation.horizontal)
-		self.imageView.setContentCompressionResistancePriority(250, for: NSLayoutConstraintOrientation.vertical)
-		
 		// Prepare a video capturing session.
 		self.session = AVCaptureSession()
 		self.session.sessionPreset = AVCaptureSession.Preset.vga640x480
