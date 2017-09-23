@@ -1,7 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -13,19 +18,19 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iSt-CV-jMe">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="iSt-CV-jMe" secondAttribute="trailing" id="De6-wC-2OM"/>
-                            <constraint firstItem="iSt-CV-jMe" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="VxR-fy-r3a"/>
-                            <constraint firstItem="iSt-CV-jMe" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="fcl-Qr-Jtq"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="iSt-CV-jMe" secondAttribute="bottom" id="zCU-4j-Wn9"/>
+                            <constraint firstItem="iSt-CV-jMe" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="85L-Zx-X2A"/>
+                            <constraint firstItem="iSt-CV-jMe" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="DaS-Rz-QUJ"/>
+                            <constraint firstAttribute="trailing" secondItem="iSt-CV-jMe" secondAttribute="trailing" id="oTM-Ss-fsz"/>
+                            <constraint firstAttribute="bottom" secondItem="iSt-CV-jMe" secondAttribute="bottom" id="xGE-Hb-Wep"/>
                         </constraints>
                     </view>
                     <connections>
@@ -34,6 +39,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="24.800000000000001" y="28.817733990147783"/>
         </scene>
     </scenes>
 </document>

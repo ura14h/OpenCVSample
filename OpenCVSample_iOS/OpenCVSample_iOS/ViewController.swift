@@ -22,10 +22,10 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 
 		// Prepare a video capturing session.
 		self.session = AVCaptureSession()
-		self.session.sessionPreset = AVCaptureSessionPreset640x480 // not work in iOS 10 simulator
+		self.session.sessionPreset = AVCaptureSession.Preset.vga640x480 // not work in iOS simulator
 		for device in AVCaptureDevice.devices() {
-			if ((device as AnyObject).position == AVCaptureDevicePosition.back) {
-				self.device = device as! AVCaptureDevice
+			if ((device as AnyObject).position == AVCaptureDevice.Position.back) {
+				self.device = device 
 			}
 		}
 		if (self.device == nil) {
@@ -70,7 +70,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 		return false
 	}
 
-	func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
+	func captureOutput(_ captureOutput: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
 		
 		// Convert a captured image buffer to UIImage.
 		guard let buffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {

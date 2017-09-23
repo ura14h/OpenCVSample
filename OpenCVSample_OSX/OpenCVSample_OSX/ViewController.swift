@@ -26,11 +26,11 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 		
 		// Prepare a video capturing session.
 		self.session = AVCaptureSession()
-		self.session.sessionPreset = AVCaptureSessionPreset640x480
+		self.session.sessionPreset = AVCaptureSession.Preset.vga640x480
 		for device in AVCaptureDevice.devices() {
 			// My Mac does not support AVCaptureDevicePosition.Back. (always AVCaptureDevicePosition.Unspecified?)
 			// A related implementation for iOS was removed on OSX.
-			self.device = device as! AVCaptureDevice
+			self.device = device 
 		}
 		if (self.device == nil) {
 			print("no device")
@@ -60,7 +60,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 		self.session.startRunning()
 	}
 
-	func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
+	func captureOutput(_ captureOutput: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
 		
 		// Convert a captured image buffer to NSImage.
 		guard let buffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
