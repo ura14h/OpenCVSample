@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3103B7E11CCC68EF00A95CC3 /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3103B7E01CCC68EF00A95CC3 /* OpenCL.framework */; };
+		314D371A1F75EFBF007624D0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 314D37191F75EFBF007624D0 /* Accelerate.framework */; };
 		31A6DA5E1B7AEA52003CD71B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A6DA5D1B7AEA52003CD71B /* AppDelegate.swift */; };
 		31A6DA601B7AEA52003CD71B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A6DA5F1B7AEA52003CD71B /* ViewController.swift */; };
 		31A6DA621B7AEA52003CD71B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31A6DA611B7AEA52003CD71B /* Images.xcassets */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		3103B7E01CCC68EF00A95CC3 /* OpenCL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCL.framework; path = System/Library/Frameworks/OpenCL.framework; sourceTree = SDKROOT; };
+		314D37191F75EFBF007624D0 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		31A6DA581B7AEA52003CD71B /* OpenCVSample_OSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenCVSample_OSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31A6DA5C1B7AEA52003CD71B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31A6DA5D1B7AEA52003CD71B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				314D371A1F75EFBF007624D0 /* Accelerate.framework in Frameworks */,
 				3103B7E11CCC68EF00A95CC3 /* OpenCL.framework in Frameworks */,
 				31A6DA811B7AEDC6003CD71B /* opencv2.framework in Frameworks */,
 			);
@@ -129,6 +132,7 @@
 		31A6DA831B7AEDCF003CD71B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				314D37191F75EFBF007624D0 /* Accelerate.framework */,
 				3103B7E01CCC68EF00A95CC3 /* OpenCL.framework */,
 				31A6DA801B7AEDC6003CD71B /* opencv2.framework */,
 			);
