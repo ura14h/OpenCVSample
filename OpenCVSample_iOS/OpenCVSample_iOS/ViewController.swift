@@ -23,11 +23,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 		// Prepare a video capturing session.
 		self.session = AVCaptureSession()
 		self.session.sessionPreset = AVCaptureSession.Preset.vga640x480 // not work in iOS simulator
-		for device in AVCaptureDevice.devices() {
-			if ((device as AnyObject).position == AVCaptureDevice.Position.back) {
-				self.device = device 
-			}
-		}
+        self.device = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .back)
 		if (self.device == nil) {
 			print("no device")
 			return
