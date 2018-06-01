@@ -10,7 +10,7 @@ import Cocoa
 import AVFoundation
 
 class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
-
+	
 	@IBOutlet weak var imageView: NSImageView!
 	
 	var session: AVCaptureSession!
@@ -19,7 +19,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
+		
 		// Prepare a video capturing session.
 		self.session = AVCaptureSession()
 		self.session.sessionPreset = AVCaptureSession.Preset.vga640x480
@@ -55,7 +55,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 		
 		self.session.startRunning()
 	}
-
+	
 	func captureOutput(_ captureOutput: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
 		
 		// Convert a captured image buffer to NSImage.
@@ -68,7 +68,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 		let capturedImage = NSImage(size: imageRep.size)
 		capturedImage.addRepresentation(imageRep)
 		CVPixelBufferUnlockBaseAddress(buffer, CVPixelBufferLockFlags.readOnly)
-
+		
 		// This is a filtering sample.
 		let resultImage = OpenCV.cvtColorBGR2GRAY(capturedImage)
 		

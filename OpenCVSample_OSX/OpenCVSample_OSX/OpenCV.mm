@@ -28,11 +28,11 @@ static void NSImageToMat(NSImage *image, cv::Mat &mat) {
 	CGContextDrawImage(contextRef, CGRectMake(0, 0, width, height), imageRef);
 	CGContextRelease(contextRef);
 	CGColorSpaceRelease(colorSpace);
-
+	
 	// Draw all pixels to the buffer.
 	cv::Mat mat8uc3 = cv::Mat((int)width, (int)height, CV_8UC3);
 	cv::cvtColor(mat8uc4, mat8uc3, CV_RGBA2BGR);
-
+	
 	mat = mat8uc3;
 }
 
@@ -47,7 +47,7 @@ static NSImage *MatToNSImage(cv::Mat &mat) {
 	} else if (mat.elemSize() == 3) {
 		cv::cvtColor(mat, matrgb, CV_BGR2RGB);
 	}
-
+	
 	// Change a image format.
 	NSData *data = [NSData dataWithBytes:matrgb.data length:(matrgb.elemSize() * matrgb.total())];
 	CGColorSpaceRef colorSpace;
