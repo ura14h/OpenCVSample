@@ -73,33 +73,14 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 			print("could not get a pixel buffer")
 			return
 		}
-		let capturedImage: UIImage
-		do {
-			CVPixelBufferLockBaseAddress(buffer, CVPixelBufferLockFlags.readOnly)
-			defer {
-				CVPixelBufferUnlockBaseAddress(buffer, CVPixelBufferLockFlags.readOnly)
-			}
-			let address = CVPixelBufferGetBaseAddressOfPlane(buffer, 0)
-			let bytes = CVPixelBufferGetBytesPerRow(buffer)
-			let width = CVPixelBufferGetWidth(buffer)
-			let height = CVPixelBufferGetHeight(buffer)
-			let color = CGColorSpaceCreateDeviceRGB()
-			let bits = 8
-			let info = CGBitmapInfo.byteOrder32Little.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue
-			guard let context = CGContext(data: address, width: width, height: height, bitsPerComponent: bits, bytesPerRow: bytes, space: color, bitmapInfo: info) else {
-				print("could not create an CGContext")
-				return
-			}
-			guard let image = context.makeImage() else {
-				print("could not create an CGImage")
-				return
-			}
-			capturedImage = UIImage(cgImage: image, scale: 1.0, orientation: UIImageOrientation.right)
-		}
+		CVPixelBufferLockBaseAddress(buffer, CVPixelBufferLockFlags.readOnly)
+		let image = CIImage(cvPixelBuffer: buffer).oriented(CGImagePropertyOrientation.right)
+		let capturedImage = UIImage(ciImage: image)
+		CVPixelBufferUnlockBaseAddress(buffer, CVPixelBufferLockFlags.readOnly)
 		
 		// This is a filtering sample.
 		let resultImage = OpenCV.cvtColorBGR2GRAY(capturedImage)
-		
+
 		// Show the result.
 		DispatchQueue.main.async(execute: {
 			self.imageView.image = resultImage
