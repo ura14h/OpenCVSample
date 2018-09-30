@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3103B7E11CCC68EF00A95CC3 /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3103B7E01CCC68EF00A95CC3 /* OpenCL.framework */; };
-		314D371A1F75EFBF007624D0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 314D37191F75EFBF007624D0 /* Accelerate.framework */; };
 		3108404E206F813100BE8C0C /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 314D37191F75EFBF007624D0 /* Accelerate.framework */; };
 		3108404F206F814400BE8C0C /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3103B7E01CCC68EF00A95CC3 /* OpenCL.framework */; };
+		314D371A1F75EFBF007624D0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 314D37191F75EFBF007624D0 /* Accelerate.framework */; };
 		31A6DA5E1B7AEA52003CD71B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A6DA5D1B7AEA52003CD71B /* AppDelegate.swift */; };
 		31A6DA601B7AEA52003CD71B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A6DA5F1B7AEA52003CD71B /* ViewController.swift */; };
 		31A6DA621B7AEA52003CD71B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31A6DA611B7AEA52003CD71B /* Images.xcassets */; };
@@ -193,7 +193,9 @@
 				TargetAttributes = {
 					31A6DA571B7AEA52003CD71B = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = U853Z6LKZW;
 						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
 					};
 					31A6DA691B7AEA52003CD71B = {
 						CreatedOnToolsVersion = 6.4;
@@ -389,7 +391,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = U853Z6LKZW;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -398,6 +403,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.homeunix.hio.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenCVSample_OSX/OpenCVSample_OSX-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -409,7 +415,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = U853Z6LKZW;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -418,6 +427,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.homeunix.hio.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenCVSample_OSX/OpenCVSample_OSX-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 			};
