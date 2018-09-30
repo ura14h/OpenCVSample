@@ -185,12 +185,12 @@
 					31A6B5CC1B7ADB70003C88EA = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = U853Z6LKZW;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 					};
 					31A6B5E11B7ADB70003C88EA = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = U853Z6LKZW;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						TestTargetID = 31A6B5CC1B7ADB70003C88EA;
 					};
 				};
@@ -405,7 +405,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenCVSample_iOS/OpenCVSample_iOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -424,7 +424,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "net.homeunix.hio.ipa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenCVSample_iOS/OpenCVSample_iOS-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -448,7 +448,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenCVSample_iOS/OpenCVSample_iOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenCVSample_iOS.app/OpenCVSample_iOS";
 			};
 			name = Debug;
@@ -468,7 +468,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "net.homeunix.hio.ipa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenCVSample_iOS/OpenCVSample_iOS-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenCVSample_iOS.app/OpenCVSample_iOS";
 			};
 			name = Release;

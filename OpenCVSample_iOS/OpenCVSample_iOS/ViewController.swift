@@ -48,7 +48,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 		}
 		do {
 			try self.device.lockForConfiguration()
-			self.device.activeVideoMinFrameDuration = CMTimeMake(1, 20) // 20 fps
+			self.device.activeVideoMinFrameDuration = CMTimeMake(value: 1, timescale: 20) // 20 fps
 			self.device.unlockForConfiguration()
 		} catch {
 			print("could not configure a device")
