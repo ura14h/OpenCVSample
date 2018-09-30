@@ -34,10 +34,10 @@ No binary version, so you need to build a source version.
 
 ## Requirements
 
-* macOS 10.13.4
-* iOS 11.4
-* Xcode 9.4
-* Swift 4.1
+* macOS 10.14
+* iOS 12.0
+* Xcode 10.0
+* Swift 4.2
 
 
 ## License
