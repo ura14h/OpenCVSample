@@ -17,7 +17,7 @@
 /// Converts an UIImage to Mat.
 /// Orientation of UIImage will be lost.
 static void UIImageToMat(UIImage *image, cv::Mat &mat) {
-	assert(image.size.width > 0 && image.size.height);
+	assert(image.size.width > 0 && image.size.height > 0);
 	assert(image.CGImage != nil || image.CIImage != nil);
 
 	// Create a pixel buffer.
