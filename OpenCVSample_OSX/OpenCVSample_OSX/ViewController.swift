@@ -26,7 +26,7 @@ class ViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDele
 		for device in AVCaptureDevice.devices() {
 			// My Mac does not support AVCaptureDevicePosition.Back. (always AVCaptureDevicePosition.Unspecified?)
 			// A related implementation for iOS was removed on OSX.
-			self.device = device 
+			self.device = device
 		}
 		if (self.device == nil) {
 			print("no device")
