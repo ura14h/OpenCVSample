@@ -31,7 +31,7 @@ static void NSImageToMat(NSImage *image, cv::Mat &mat) {
 	
 	// Draw all pixels to the buffer.
 	cv::Mat mat8uc3 = cv::Mat((int)width, (int)height, CV_8UC3);
-	cv::cvtColor(mat8uc4, mat8uc3, CV_RGBA2BGR);
+	cv::cvtColor(mat8uc4, mat8uc3, cv::COLOR_RGBA2BGR);
 	
 	mat = mat8uc3;
 }
@@ -43,9 +43,9 @@ static NSImage *MatToNSImage(cv::Mat &mat) {
 	assert(mat.elemSize() == 1 || mat.elemSize() == 3);
 	cv::Mat matrgb;
 	if (mat.elemSize() == 1) {
-		cv::cvtColor(mat, matrgb, CV_GRAY2RGB);
+		cv::cvtColor(mat, matrgb, cv::COLOR_GRAY2RGB);
 	} else if (mat.elemSize() == 3) {
-		cv::cvtColor(mat, matrgb, CV_BGR2RGB);
+		cv::cvtColor(mat, matrgb, cv::COLOR_BGR2RGB);
 	}
 	
 	// Change a image format.
@@ -74,7 +74,7 @@ static NSImage *MatToNSImage(cv::Mat &mat) {
 	cv::Mat bgrMat;
 	NSImageToMat(image, bgrMat);
 	cv::Mat grayMat;
-	cv::cvtColor(bgrMat, grayMat, CV_BGR2GRAY);
+	cv::cvtColor(bgrMat, grayMat, cv::COLOR_BGR2GRAY);
 	NSImage *grayImage = MatToNSImage(grayMat);
 	return grayImage;
 }
