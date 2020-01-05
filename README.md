@@ -7,7 +7,7 @@ Sample programs for OpenCV and Swift and iOS and macOS.
 
 ## OpenCV
 
-Those projects uses OpenCV version 4.0.1.
+Those projects uses OpenCV version 4.2.
 However, OpenCV binary isn't include in those projects.
 You can get OpenCV binary by following steps.
 
