@@ -2,15 +2,16 @@
 //  OpenCV.h
 //  OpenCVSample_iOS
 //
-//  Created by Hiroki Ishiura on 2015/08/12.
-//  Copyright (c) 2015年 Hiroki Ishiura. All rights reserved.
+//  Created by Hiroki Ishiura on 2020/01/04.
+//  Copyright © 2020 Hiroki Ishiura. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface OpenCV : NSObject
 
-/// Converts a full color image to grayscale image with using OpenCV.
-+ (nonnull UIImage *)cvtColorBGR2GRAY:(nonnull UIImage *)image;
-
 @end
+
+NS_ASSUME_NONNULL_END
