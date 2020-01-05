@@ -709,16 +709,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NJ1-RH-c8j">
-                                <rect key="frame" x="20" y="20" width="440" height="230"/>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="NJ1-RH-c8j">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="MDJ-bI-vM7"/>
                             </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="NJ1-RH-c8j" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="0yE-Dl-iEa"/>
-                            <constraint firstAttribute="trailing" secondItem="NJ1-RH-c8j" secondAttribute="trailing" constant="20" symbolic="YES" id="OPE-Ks-oK5"/>
-                            <constraint firstItem="NJ1-RH-c8j" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="nPq-ED-lXR"/>
-                            <constraint firstAttribute="bottom" secondItem="NJ1-RH-c8j" secondAttribute="bottom" constant="20" symbolic="YES" id="rQd-MI-0dK"/>
+                            <constraint firstItem="NJ1-RH-c8j" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="0yE-Dl-iEa"/>
+                            <constraint firstAttribute="trailing" secondItem="NJ1-RH-c8j" secondAttribute="trailing" id="OPE-Ks-oK5"/>
+                            <constraint firstItem="NJ1-RH-c8j" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="nPq-ED-lXR"/>
+                            <constraint firstAttribute="bottom" secondItem="NJ1-RH-c8j" secondAttribute="bottom" id="rQd-MI-0dK"/>
                         </constraints>
                     </view>
                     <connections>
