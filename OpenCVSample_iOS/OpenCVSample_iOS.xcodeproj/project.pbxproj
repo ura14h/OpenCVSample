@@ -67,13 +67,13 @@
 				311301CE23C023B700B7C7A5 /* AppDelegate.swift */,
 				311301D023C023B700B7C7A5 /* SceneDelegate.swift */,
 				311301D223C023B700B7C7A5 /* ViewController.swift */,
+				3113020923C0311400B7C7A5 /* OpenCV.h */,
+				3113020A23C0311400B7C7A5 /* OpenCV.mm */,
 				3113020223C02F1000B7C7A5 /* OpenCVSample_iOS-Bridging-Header.h */,
 				311301D423C023B700B7C7A5 /* Main.storyboard */,
 				311301D723C023B900B7C7A5 /* Assets.xcassets */,
 				311301D923C023B900B7C7A5 /* LaunchScreen.storyboard */,
 				311301DC23C023B900B7C7A5 /* Info.plist */,
-				3113020923C0311400B7C7A5 /* OpenCV.h */,
-				3113020A23C0311400B7C7A5 /* OpenCV.mm */,
 			);
 			path = OpenCVSample_iOS;
 			sourceTree = "<group>";
